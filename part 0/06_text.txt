@@ -1,0 +1,7 @@
+browser->server: HTTP POST https://studies.cs.helsinki.fi/exampleapp/new_note_spa
+server-->browser: HTML-code
+
+note over browser:
+browser fetches js-code from server
+note list is re-rendered with js-code
+end note
