@@ -14,7 +14,7 @@ const Button = ({handleClick, text}) => (
   </button>
 )
 
-const Statistics = ({text, count}) => {
+const StatisticLine = ({text, count}) => {
   return (
     <div>
       {text} {count}
@@ -59,13 +59,13 @@ const App = () => {
     else {
       return (
         <>
-          <Statistics text={textGood} count={good} />
-          <Statistics text={textNeutral} count={neutral} />
-          <Statistics text={textBad} count={bad} />
+          <StatisticLine text={textGood} count={good} />
+          <StatisticLine text={textNeutral} count={neutral} />
+          <StatisticLine text={textBad} count={bad} />
 
-          <Statistics text='all' count={total} />
-          <Statistics text='average' count={average(total)} />
-          <Statistics text='positive' count={positive(good, total)} />
+          <StatisticLine text='all' count={total} />
+          <StatisticLine text='average' count={average(total)} />
+          <StatisticLine text='positive' count={positive(good, total)} />
         </>
       )
     }
