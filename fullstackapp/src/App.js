@@ -16,9 +16,10 @@ const Button = ({handleClick, text}) => (
 
 const StatisticLine = ({text, count}) => {
   return (
-    <div>
-      {text} {count}
-    </div>
+    <tr>
+      <td>{text}</td>
+      <td>{count}</td>
+    </tr>
   )
 }
 
@@ -53,25 +54,25 @@ const App = () => {
   let total = calcTotal([good, neutral, bad])
 
   const display = () => {
-    if (total == 0) {
+    if (total === 0) {
       return <p>No feedback given</p>
     }
     else {
       return (
-        <>
-          <StatisticLine text={textGood} count={good} />
-          <StatisticLine text={textNeutral} count={neutral} />
-          <StatisticLine text={textBad} count={bad} />
+        <table>
+          <tbody>
+            <StatisticLine text={textGood} count={good} />
+            <StatisticLine text={textNeutral} count={neutral} />
+            <StatisticLine text={textBad} count={bad} />
 
-          <StatisticLine text='all' count={total} />
-          <StatisticLine text='average' count={average(total)} />
-          <StatisticLine text='positive' count={positive(good, total)} />
-        </>
+            <StatisticLine text='all' count={total} />
+            <StatisticLine text='average' count={average(total)} />
+            <StatisticLine text='positive' count={positive(good, total)} />
+          </tbody>
+        </table>
       )
     }
   }
-
-  
 
   return (
     <div>
