@@ -1,87 +1,52 @@
-import React from 'react'
+import React, { useState } from 'react'
 
-// Render name of course
-const Header = (props) => {
+const Header = ({name}) => {
   return (
-    <div>
-      <h1>
-          {props.name}
-      </h1>
-    </div>
+    <h1>
+      {name}
+    </h1>
   )
 }
 
-// Render Parts
-const Content = (props) => {
+const Button = ({handleClick, text}) => (
+  <button onClick={handleClick}>
+    {text}
+  </button>
+)
 
-  let part1 = props.parts[0]
-  let part2 = props.parts[1]
-  let part3 = props.parts[2]
-
+const Statistics = ({text, count}) => {
   return (
     <div>
-      <Part name={part1.name} exercises={part1.exercises} />
-      <Part name={part2.name} exercises={part2.exercises} />
-      <Part name={part3.name} exercises={part3.exercises} />
+      {text} {count}
     </div>
   )
-}
-
-// Render parts and number of exercises
-const Part = (props) => {
-  return (
-    <div>
-      <p>
-        {props.name} {props.exercises}
-      </p>
-    </div>
-  )
-}
-
-// Render total number of exercises
-const Total = (props) => {
-
-  let total = 0
-
-  props.parts.forEach(part => {
-    total += part.exercises
-  })
-  return (
-    <div>
-      <p>
-        Number of exercises {total}
-      </p>
-    </div>
-  )
-
-  
 }
 
 const App = () => {
-  const course = {
-    name: 'Half Stack application development',
-    parts: [
-      {
-        name: 'Fundamentals of React',
-        exercises: 10
-      },
-      {
-        name: 'Using props to pass data',
-        exercises: 7
-      },
-      {
-        name: 'State of a component',
-        exercises: 14
-      }
-    ]
-  }
+  // save clicks of each button to its own state
+  const [good, setGood] = useState(0)
+  const [neutral, setNeutral] = useState(0)
+  const [bad, setBad] = useState(0)
+
+  const textGood = 'good'
+  const textNeutral = 'neutral'
+  const textBad = 'bad'
 
   return (
-    <>
-      <Header name={course.name} />
-      <Content parts={course.parts} />
-      <Total parts={course.parts}/>
-    </>
+    <div>
+      <div>
+        <Header name='give feedback' />
+        <Button handleClick={() => setGood(good + 1)} text={textGood} />
+        <Button handleClick={() => setNeutral(neutral + 1)} text={textNeutral} />
+        <Button handleClick={() => setBad(bad + 1)} text={textBad} />
+      </div>
+      <div>
+        <Header name='statistics' />
+        <Statistics text={textGood} count={good} />
+        <Statistics text={textNeutral} count={neutral} />
+        <Statistics text={textBad} count={bad} />
+      </div>
+    </div>
   )
 }
 
