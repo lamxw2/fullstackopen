@@ -32,6 +32,26 @@ const App = () => {
   const textNeutral = 'neutral'
   const textBad = 'bad'
 
+  const calcTotal = (counts) => {
+    return (
+      counts[0] + counts[1] + counts[2]
+    )
+  }
+
+  const average = (total) => {
+    return (
+      total/3
+    )
+  }
+
+  const positive = (good, total) => {
+    return (
+        good/total*100 + ' %'
+      )
+  }
+
+  let total = calcTotal([good, neutral, bad])
+
   return (
     <div>
       <div>
@@ -42,9 +62,15 @@ const App = () => {
       </div>
       <div>
         <Header name='statistics' />
+
         <Statistics text={textGood} count={good} />
         <Statistics text={textNeutral} count={neutral} />
         <Statistics text={textBad} count={bad} />
+
+        <Statistics text='all' count={total} />
+        <Statistics text='average' count={average(total)} />
+        <Statistics text='positive' count={positive(good, total)} />
+
       </div>
     </div>
   )
