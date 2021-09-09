@@ -52,6 +52,27 @@ const App = () => {
 
   let total = calcTotal([good, neutral, bad])
 
+  const display = () => {
+    if (total == 0) {
+      return <p>No feedback given</p>
+    }
+    else {
+      return (
+        <>
+          <Statistics text={textGood} count={good} />
+          <Statistics text={textNeutral} count={neutral} />
+          <Statistics text={textBad} count={bad} />
+
+          <Statistics text='all' count={total} />
+          <Statistics text='average' count={average(total)} />
+          <Statistics text='positive' count={positive(good, total)} />
+        </>
+      )
+    }
+  }
+
+  
+
   return (
     <div>
       <div>
@@ -63,13 +84,7 @@ const App = () => {
       <div>
         <Header name='statistics' />
 
-        <Statistics text={textGood} count={good} />
-        <Statistics text={textNeutral} count={neutral} />
-        <Statistics text={textBad} count={bad} />
-
-        <Statistics text='all' count={total} />
-        <Statistics text='average' count={average(total)} />
-        <Statistics text='positive' count={positive(good, total)} />
+        {display()}
 
       </div>
     </div>
