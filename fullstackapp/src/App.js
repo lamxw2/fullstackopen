@@ -1,5 +1,12 @@
 import React, { useState } from 'react'
 
+const Anecdote = ({anecdote, point}) => (
+  <div>
+    {anecdote}<br/>
+    has {point} number of votes
+  </div>
+)
+
 const Button = ({handleClick, text}) => (
   <button onClick={handleClick}>
     {text}
@@ -27,16 +34,43 @@ const App = () => {
     
   const [selected, setSelected] = useState(0)
 
-  return (
-    <div>
-      {anecdotes[selected]}<br/>
-      has {points[selected]} number of votes
+  // Obtain the array index of the highest voted anecdote
+  const indexOfMax = () => {
 
+    let maxPoints = points[0]
+    let maxIndex = 0
+
+    for (let i = 1; i < points.length; i++) {
+      if (points[i] > maxPoints) {
+        maxIndex = i;
+        maxPoints = points[i]
+      }
+    }
+
+    return (maxIndex)
+
+  }
+
+  // Assign index to a variable
+  let maxIndex = indexOfMax()
+
+  return (
+    <>
       <div>
-        <Button handleClick={() => handleUpdate(selected)} text='vote' />
-        <Button handleClick={() => setSelected(Math.floor(Math.random() * (anecdotes.length - 1)))} text='next anecdote' />
+        <h1>Anecdote of the day</h1>
+        <Anecdote anecdote={anecdotes[selected]} point={points[selected]} />
+
+        <div>
+          <Button handleClick={() => handleUpdate(selected)} text='vote' />
+          <Button handleClick={() => setSelected(Math.floor(Math.random() * (anecdotes.length - 1)))} text='next anecdote' />
+        </div>
       </div>
-    </div>
+      <div>
+        <h1>Anecdote with most votes</h1>
+        <Anecdote anecdote={anecdotes[maxIndex]} point={points[maxIndex]} />
+
+      </div>
+    </>
   )
 }
 
